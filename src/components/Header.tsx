@@ -30,11 +30,11 @@ const Header = () => {
   }, []);
 
   return (
-    <header className=" w-full border-b border-gray-200 bg-[#f8f8f7]">
-      <div className="mx-auto flex h-[64px] max-w-[1280px] items-center justify-between gap-5 px-8">
+    <header className="fixed z-50 w-full border-b border-gray-200 bg-[#f8f8f7]">
+      <div className="mx-auto flex h-[64px] max-w-[1280px] items-center justify-between gap-5 px-3 lg:px-8">
         <div className="flex items-center gap-2">
           <Bike size={25} strokeWidth={2.5} className="text-[#173d32]" />
-          <h1 className="text-[24px] font-bold tracking-wide text-[#263d35]">
+          <h1 className=" text-lg lg:text-[24px] font-bold tracking-wide text-[#263d35] ">
             InstantMart
           </h1>
         </div>

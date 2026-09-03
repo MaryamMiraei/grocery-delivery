@@ -14,3 +14,20 @@
   --color-app-error: #ef4444;
   --color-app-warning: #f59e0b;
 }
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--color-app-green-lighter);
+  border-radius: 9999px;
+}
+
+*::-webkit-scrollbar-button {
+  display: none;
+}
