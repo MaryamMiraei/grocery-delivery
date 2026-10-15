@@ -1,12 +1,13 @@
 import { Clock, Leaf, ShieldCheck, Truck } from 'lucide-react';
 
+
 const Introduction = () => {
   return (
-    <section className='pt-[64px]'>
+    <section>
       <section className="relative mx-auto mt-4 h-[540px] w-full overflow-hidden rounded-[20px]">
         {/* Background Image */}
         <img
-          src="src/assets/vegetables.jpeg"
+          src="public/vegetables.jpeg"
           alt="Fresh vegetables"
           className="absolute inset-0 h-full w-full object-cover"
         />

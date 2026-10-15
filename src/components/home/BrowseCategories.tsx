@@ -1,32 +1,32 @@
 import { Link } from "react-router";
-import { category } from "../api/category";
-import { useRef } from "react";
+import { category } from "../../api/category";
+// import { category } from "../api/category";
 
 const BrowseCategories = () => {
-  const scrollRef = useRef(null);
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const scrollLeft = useRef(0);
+  // const scrollRef = useRef(null);
+  // const isDragging = useRef(false);
+  // const startX = useRef(0);
+  // const scrollLeft = useRef(0);
 
-  const handlePointerDown = (e) => {
-    isDragging.current = true;
-    startX.current = e.clientX;
-    scrollLeft.current = scrollRef.current.scrollLeft;
+  // const handlePointerDown = (e) => {
+  //   isDragging.current = true;
+  //   startX.current = e.clientX;
+  //   scrollLeft.current = scrollRef.current.scrollLeft;
 
-    scrollRef.current.setPointerCapture(e.pointerId);
-  };
+  //   scrollRef.current.setPointerCapture(e.pointerId);
+  // };
 
-  const handlePointerMove = (e) => {
-    if (!isDragging.current) return;
+  // const handlePointerMove = (e) => {
+  //   if (!isDragging.current) return;
 
-    const distance = e.clientX - startX.current;
+  //   const distance = e.clientX - startX.current;
 
-    scrollRef.current.scrollLeft = scrollLeft.current - distance;
-  };
+  //   scrollRef.current.scrollLeft = scrollLeft.current - distance;
+  // };
 
-  const handlePointerUp = () => {
-    isDragging.current = false;
-  };
+  // const handlePointerUp = () => {
+  //   isDragging.current = false;
+  // };
 
   return (
     <section className="py-16">
@@ -38,11 +38,11 @@ const BrowseCategories = () => {
       </div>
       <div
         className="flex items-center mt-8 overflow-x-scroll my-scroll"
-        ref={scrollRef}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerCancel={handlePointerUp}
+        // ref={scrollRef}
+        // onPointerDown={handlePointerDown}
+        // onPointerMove={handlePointerMove}
+        // onPointerUp={handlePointerUp}
+        // onPointerCancel={handlePointerUp}
       >
         {category.map((item) => (
           <Link

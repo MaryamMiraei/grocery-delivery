@@ -6,6 +6,17 @@ import Products from "./pages/Products";
 import Deals from "./pages/Deals";
 import LoginLayout from "./layouts/LoginLayout";
 import Login from "./pages/Login";
+import ProductSelected from "./pages/ProductSelected";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+const client = new QueryClient({
+  defaultOptions:{
+    queries:{
+
+    }
+  }
+});
+
 
 const router = createBrowserRouter([
   {
@@ -18,6 +29,12 @@ const router = createBrowserRouter([
       {
         path: "/products",
         Component: Products,
+        children:[
+          {
+            path: ":id",
+            Component: ProductSelected
+          }
+        ]
       },
       {
         path: "/deals",
@@ -39,7 +56,10 @@ const router = createBrowserRouter([
 const App = () => {
   return (
     <>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={client}>
+        
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </>
   );
 };
