@@ -10,14 +10,17 @@ const MyCard = ({ onClose }: IProps) => {
     (sum, item) => sum + item.price * item.quantity,
     0,
   );
-    const total = subtotal;
-
+  const total = subtotal;
 
   return (
     <div className="fixed inset-0 z-50">
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
 
-      <aside className="absolute right-0 top-0 flex h-full w-full max-w-md flex-col bg-white shadow-2xl">
+      <aside
+        className="absolute right-0 top-0 flex h-full w-full max-w-md flex-col bg-white shadow-2xl transition-all
+    duration-300
+    ease-out"
+      >
         <header className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
           <div className="flex items-center gap-2.5">
             <span className="text-lg">🛒</span>

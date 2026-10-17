@@ -9,16 +9,14 @@ import Login from "./pages/Login";
 import ProductSelected from "./pages/ProductSelected";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {ReactQueryDevtools} from "@tanstack/react-query-devtools"
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 const client = new QueryClient({
-  defaultOptions:{
-    queries:{
-      staleTime:60_000,
-
-    }
-  }
+  defaultOptions: {
+    queries: {
+      staleTime: 60_000,
+    },
+  },
 });
-
 
 const router = createBrowserRouter([
   {
@@ -31,13 +29,12 @@ const router = createBrowserRouter([
       {
         path: "/products",
         Component: Products,
-        children:[
-          {
-            path: ":id",
-            Component: ProductSelected
-          }
-        ]
       },
+      {
+        path: "/products/:id",
+        Component: ProductSelected,
+      },
+
       {
         path: "/deals",
         Component: Deals,
@@ -59,7 +56,7 @@ const App = () => {
   return (
     <>
       <QueryClientProvider client={client}>
-        <ReactQueryDevtools initialIsOpen={false}/>
+        <ReactQueryDevtools initialIsOpen={false} />
         <RouterProvider router={router} />
       </QueryClientProvider>
     </>

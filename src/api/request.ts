@@ -16,6 +16,8 @@ export const getRelativeProduct = async (
   const response = await api.get("/products", {
     params: {
       category,
+      page: 1,
+      limit: 2,
     },
   });
   return response.data.products;
@@ -25,5 +27,3 @@ export const getDealsProduct = async (): Promise<IProduct[]> => {
   const response = await api.get("products/flash-deals");
   return response.data.products;
 };
-
-

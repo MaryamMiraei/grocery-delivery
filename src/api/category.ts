@@ -1,4 +1,5 @@
 export const category = [
+
   {
     id: crypto.randomUUID(),
     icon: "/public/fruits_vegetables-DKTFzdXr.png",

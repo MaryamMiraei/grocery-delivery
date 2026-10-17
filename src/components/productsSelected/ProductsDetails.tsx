@@ -1,12 +1,20 @@
-interface IProps{
-  product:  IProduct | undefined,
+import { Link } from "react-router";
+import { useMyCardStore } from "../../store/myCardStore";
+
+interface IProps {
+  product: IProduct | undefined;
 }
-const ProductsDetails = ( {product}:IProps ) => {
-  console.log(product, "product props")
+const ProductsDetails = ({ product }: IProps) => {
+  const { addItem, updateQuantity, items , removeItem} = useMyCardStore();
+
+  const currentItem = items.find((item) => item.id === product?.id);
+  const currentQuantity = currentItem ? currentItem.quantity : 0;
+
   return (
     <section className="min-h-screen px-5 lg:px-20 py-10">
       <div className="text-gray-500 mb-8">
-        Home / Products / {product?.category} /
+        <Link to={"/"}>Home </Link>/<Link to={"/products"}>Products </Link> /
+        {product?.category} /
         <span className="text-gray-800">{product?.name}</span>
       </div>
       <div className="grid lg:grid-cols-2 gap-10 bg-white rounded-3xl p-8">
@@ -44,32 +52,53 @@ const ProductsDetails = ( {product}:IProps ) => {
 
           <p className="text-gray-600 mt-6">${product?.description}</p>
 
-          <div className="mt-6 text-green-600 font-semibold">✓ In Stock</div>
-
-          <div className="flex items-center gap-5 mt-8">
-            <button
-              //   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              className="border rounded-lg w-10 h-10"
-            >
-              -
-            </button>
-
-            {/* <span>{quantity}</span> */}
-
-            <button
-              //   onClick={() => setQuantity(quantity + 1)}
-              className="border rounded-lg w-10 h-10"
-            >
-              +
-            </button>
+          <div className="mt-6 text-green-600 font-semibold">
+            ✓ <span>{product?.stock} </span>In Stock
           </div>
 
-          <button
-            // onClick={() => addToCart(product)}
-            className="mt-8 bg-orange-500 hover:bg-orange-600 text-white w-full py-4 rounded-2xl text-lg font-semibold"
-          >
-            Add to Cart
-          </button>
+          {currentQuantity === 0 ? (
+            <button
+              onClick={() =>
+                addItem({
+                  id: product?.id!,
+                  name: product?.name!,
+                  price: product?.price!,
+                  image: product?.image!,
+                  quantity: 1,
+                  stock: product?.stock!,
+                })
+              }
+              className="mt-8 bg-orange-500 hover:bg-orange-600 text-white w-full py-4 rounded-2xl text-lg font-semibold"
+            >
+              Add to Cart
+            </button>
+          ) : (
+            <div className="flex items-center gap-5 mt-8">
+              <button
+                onClick={() => {
+                  if (currentQuantity > 1) {
+                    updateQuantity(product?.id!, currentQuantity - 1);
+                  } else {
+                    removeItem(product?.id!);
+                  }
+                }}
+                className="border rounded-lg w-10 h-10"
+              >
+                -
+              </button>
+
+              <span>{currentQuantity}</span>
+
+              <button
+                onClick={() =>
+                  updateQuantity(product?.id!, currentQuantity + 1)
+                }
+                className="border rounded-lg w-10 h-10"
+              >
+                +
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>

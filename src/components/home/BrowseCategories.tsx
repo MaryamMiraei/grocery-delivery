@@ -1,6 +1,5 @@
 import { Link } from "react-router";
 import { category } from "../../api/category";
-// import { category } from "../api/category";
 
 const BrowseCategories = () => {
   // const scrollRef = useRef(null);

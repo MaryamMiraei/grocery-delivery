@@ -28,7 +28,7 @@ export const useMyCardStore = create<ICardStore>()(
               ),
             };
           }
-          return { items: [...items, newItem] };
+          return { items: [...state.items, newItem] };
         }),
       removeItem: (id) =>
         set((state) => ({

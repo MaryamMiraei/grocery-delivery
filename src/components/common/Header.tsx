@@ -10,12 +10,15 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import MyCard from "./MyCard";
+import { useMyCardStore } from "../../store/myCardStore";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen]= useState(false);
   const onClose = ()=> setIsCartOpen(false)
   const onOpen = ()=> setIsCartOpen(true);
+  const {items}=useMyCardStore()
+  const totalItemBuy = items.reduce((total,item)=> total+ item.quantity,0)
   
   // const menuRef = useRef(null);
 
@@ -80,14 +83,15 @@ const Header = () => {
           </div>
 
           {/* Cart */}
-          <button className="transition hover:scale-110"
+          <button className="transition hover:scale-110 relative"
           onClick={onOpen}
           >
             <ShoppingCart
               size={24}
               strokeWidth={2}
-              className="text-[#263d35]"
+              className="text-[#263d35] "
             />
+           {totalItemBuy >0 &&  <div className="absolute -top-1 left-4 size-4 bg-app-orange-dark text-white rounded-full text-[11px]">{totalItemBuy}</div>}
           </button>
           {isCartOpen && <MyCard onClose={onClose}/>}
 
