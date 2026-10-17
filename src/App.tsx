@@ -9,9 +9,11 @@ import Login from "./pages/Login";
 import ProductSelected from "./pages/ProductSelected";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {ReactQueryDevtools} from "@tanstack/react-query-devtools"
 const client = new QueryClient({
   defaultOptions:{
     queries:{
+      staleTime:60_000,
 
     }
   }
@@ -57,7 +59,7 @@ const App = () => {
   return (
     <>
       <QueryClientProvider client={client}>
-        
+        <ReactQueryDevtools initialIsOpen={false}/>
         <RouterProvider router={router} />
       </QueryClientProvider>
     </>

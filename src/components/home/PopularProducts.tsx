@@ -12,7 +12,6 @@ const PopularProducts = () => {
     queryKey: ["getProduct"],
     queryFn: getProducts,
   });
-console.log(products, "products")
   return (
     <section className="my-10">
       <div className="flex justify-between items-center mb-6">
@@ -28,7 +27,7 @@ console.log(products, "products")
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
         {products?.slice(0,10).map((product) => (
-          <ProductCard product={product}/>
+          <ProductCard key={product.id} product={product}/>
         ))}
       </div>
     </section>

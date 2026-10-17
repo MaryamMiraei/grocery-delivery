@@ -1,8 +1,15 @@
-import React from 'react'
+import { useQuery } from "@tanstack/react-query";
+import { getDealsProduct } from "../api/request";
+import ProductCard from "../components/common/ProductCard";
 
 const Deals = () => {
+  const { data:products } = useQuery({
+    queryKey: ["Deals"],
+    queryFn: getDealsProduct,
+  });
+
   return (
-    <div className=" mx-auto max-w-7xl py-6 pt-[64px]">
+    <div className="  pt-[64px]">
       <div className="text-center m-auto bg-linear-to-r from-app-orange to-app-orange-dark text-white py-10">
         <div className="flex items-center justify-center  gap-2 mb-3">
           <svg
@@ -45,8 +52,16 @@ const Deals = () => {
           </p>
         </div>
       </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4">
+          {products?.map((product) => (
+            <ProductCard product={product} />
+          ))}
+        </div>
+      </div>
     </div>
   );
-}
+};
 
-export default Deals
+export default Deals;

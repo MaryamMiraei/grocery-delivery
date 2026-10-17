@@ -9,25 +9,29 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
+import MyCard from "./MyCard";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen]= useState(false);
+  const onClose = ()=> setIsCartOpen(false)
+  const onOpen = ()=> setIsCartOpen(true);
+  
+  // const menuRef = useRef(null);
 
-  const menuRef = useRef(null);
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     if (menuRef.current && !menuRef.current.contains(event.target)) {
+  //       setIsMenuOpen(false);
+  //     }
+  //   };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsMenuOpen(false);
-      }
-    };
+  //   document.addEventListener("mousedown", handleClickOutside);
 
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, []);
 
   return (
     <header className="fixed z-50 w-full border-b border-gray-200 bg-[#f8f8f7]">
@@ -39,7 +43,7 @@ const Header = () => {
           </h1>
         </div>
         {/* Navigation */}
-        <nav className="hidden lg:flex items-center gap-8 text-[15px]">
+        <nav className="hidden md:flex items-center gap-8 text-[15px]">
           <NavLink
             to="/"
             className="text-[#263d35] transition hover:text-orange-500"
@@ -76,13 +80,16 @@ const Header = () => {
           </div>
 
           {/* Cart */}
-          <button className="transition hover:scale-110">
+          <button className="transition hover:scale-110"
+          onClick={onOpen}
+          >
             <ShoppingCart
               size={24}
               strokeWidth={2}
               className="text-[#263d35]"
             />
           </button>
+          {isCartOpen && <MyCard onClose={onClose}/>}
 
           {/* Menu / Close */}
           <button
@@ -98,7 +105,7 @@ const Header = () => {
 
           {/* Mobile Menu */}
           <div
-            ref={menuRef}
+            // ref={menuRef}
             className={`
     absolute right-[20px] top-[60px] z-50
     w-[225px]
