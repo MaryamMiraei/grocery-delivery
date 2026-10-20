@@ -10,18 +10,21 @@ export const getProduct = async (id: string): Promise<IProduct> => {
   return response.data.product;
 };
 
-export const getRelativeProduct = async (
-  category: string,
-): Promise<IProduct[]> => {
+
+export const getRelativeProduct = async (filters: IProductFilters) => {
+  const cleanFilters = Object.fromEntries(
+    Object.entries(filters).filter(
+      ([_, value]) => value !== "" && value !== undefined && value !== null,
+    ),
+  );
+
   const response = await api.get("/products", {
-    params: {
-      category,
-      page: 1,
-      limit: 2,
-    },
+    params: cleanFilters,
   });
+
   return response.data.products;
 };
+
 
 export const getDealsProduct = async (): Promise<IProduct[]> => {
   const response = await api.get("products/flash-deals");

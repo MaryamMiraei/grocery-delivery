@@ -43,7 +43,7 @@ const BrowseCategories = () => {
         // onPointerUp={handlePointerUp}
         // onPointerCancel={handlePointerUp}
       >
-        {category.map((item) => (
+        {category.slice(1,10).map((item) => (
           <Link
             key={item.id}
             to={`/products${item.link}`}

@@ -24,3 +24,11 @@ interface ICartItem {
   image: string;
   stock: number;
 }
+
+interface IProductFilters {
+  category?: string;
+  maxPrice?: string;
+  minPrice?:string;
+  page?: string;
+  limit?: string;
+}
